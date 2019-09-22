@@ -4,7 +4,7 @@ tar -vzxf eclipse-inst-linux64.tar.gz;
 
 ./eclipse-installer/eclipse-inst;
 
-
+echo >> /home/matias/.local/share/applications/eclipse.desktop
 [Desktop Entry]
 
 Name=Eclipse
@@ -19,5 +19,5 @@ Terminal=false
 
 Type=Application
 
->> /home/matias/.local/share/applications/eclipse.desktop
+
 
