@@ -1,7 +1,9 @@
-# scripts
-Scripts em Shell Script para automatização de instalação do MySQL para Benchmark TPC-H como 
+# Introdução
+Arquivos para automatização de instalação do `MySQL` para Benchmark TPC-H como 
 pré-requisito de Trabalho de final de curso do curso de Bacharelado em Sistemas de Informação pela Universidade Federal 
 Rural de Pernambuco.
+
+Há também um script em .SQL que para automatizar a criação da base de dados, juntamente com os respectivos relacionamentos propostos no teste como a importação
 
 
 ## Atualização do sistema
