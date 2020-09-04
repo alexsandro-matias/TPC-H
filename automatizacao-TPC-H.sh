@@ -11,12 +11,13 @@ git clone https://github.com/electrum/tpch-dbgen.git
 
 
 # 
-CC=gcc
-DATABASE=INFORMIX
-MACHINE=LINUX
-WORKLOAD=TPCH >> cd ~ tpch-dbgen/makefile.suite
+# CC=gcc
+# DATABASE=INFORMIX
+# MACHINE=LINUX
+# WORKLOAD=TPCH 
+#>> cd ~ tpch-dbgen/makefile.suite
 
-make -f makefile.suite
+# make -f makefile.suite
 
 
 

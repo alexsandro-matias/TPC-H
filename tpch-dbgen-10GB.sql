@@ -1,3 +1,15 @@
+CREATE USER 'matias'@'localhost' IDENTIFIED BY 'matias';
+
+GRANT ALL PRIVILEGES ON *.* TO 'matias'@'localhost' WITH GRANT OPTION;
+
+
+FLUSH PRIVILEGES;
+
+create database tpch;
+use tpch;
+
+
+
 CREATE TABLE NATION  ( N_NATIONKEY  INTEGER NOT NULL,
                             N_NAME       CHAR(25) NOT NULL,
                             N_REGIONKEY  INTEGER NOT NULL,
@@ -67,6 +79,28 @@ CREATE TABLE LINEITEM ( L_ORDERKEY    INTEGER NOT NULL,
                              L_SHIPMODE     CHAR(10) NOT NULL,
                              L_COMMENT      VARCHAR(44) NOT NULL);
 
+
+SET GLOBAL local_infile = 1;
+
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/customer.tbl' INTO TABLE CUSTOMER FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/orders.tbl' INTO TABLE ORDERS FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/lineitem.tbl' INTO TABLE LINEITEM FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/nation.tbl' INTO TABLE NATION FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/partsupp.tbl' INTO TABLE PARTSUPP FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/part.tbl' INTO TABLE PART FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/region.tbl' INTO TABLE REGION FIELDS TERMINATED BY '|';
+
+LOAD DATA LOCAL INFILE '/home/matias/automatizacao-mysql/tpch-dbgen/data/supplier.tbl' INTO TABLE SUPPLIER FIELDS TERMINATED BY '|';
+
+
+
 ALTER TABLE NATION
 ADD PRIMARY KEY (N_NATIONKEY);
 ALTER TABLE NATION
@@ -97,24 +131,6 @@ ALTER TABLE LINEITEM
 ADD FOREIGN KEY LINEITEM_FK2 (L_PARTKEY,L_SUPPKEY) references PARTSUPP(PS_PARTKEY, PS_SUPPKEY);
 
 
-SET GLOBAL local_infile = 1;
-
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/customer.tbl' INTO TABLE CUSTOMER FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/orders.tbl' INTO TABLE ORDERS FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/lineitem.tbl' INTO TABLE LINEITEM FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/nation.tbl' INTO TABLE NATION FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/partsupp.tbl' INTO TABLE PARTSUPP FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/part.tbl' INTO TABLE PART FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/region.tbl' INTO TABLE REGION FIELDS TERMINATED BY '|';
-
-LOAD DATA LOCAL INFILE '~tpch-dbgen-10GB/data/supplier.tbl' INTO TABLE SUPPLIER FIELDS TERMINATED BY '|';
 
 
 
