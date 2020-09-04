@@ -1,5 +1,7 @@
 # scripts
-Scripts em Shell Script para automatização de instalação de diversos programas
+Scripts em Shell Script para automatização de instalação do MySQL para Benchmark TPC-H como 
+pré-requisito de Trabalho de final de curso do curso de Bacharelado em Sistemas de Informação pela Universidade Federal 
+Rural de Pernambuco.
 
 
 ## Atualização do sistema
