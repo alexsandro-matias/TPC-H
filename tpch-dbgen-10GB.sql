@@ -186,15 +186,133 @@ ADD FOREIGN KEY LINEITEM_FK1 (L_ORDERKEY)  references ORDERS(O_ORDERKEY);
 ALTER TABLE LINEITEM
 ADD FOREIGN KEY LINEITEM_FK2 (L_PARTKEY,L_SUPPKEY) references 
         PARTSUPP(PS_PARTKEY, PS_SUPPKEY);
+        
 
+--Parte das otimizações
+--Link - https://www.youtube.com/watch?v=rTIQPokwZ_o&index=3&list=PLnNeM4deC9TmYysSsy2JPHwkaIYKDr5tc
 
+--O que são Índices??
+--No contexto da estrutura de dados:
+--trata se de uma referência associada
+--a uma chave. É utilizada para fins de otimização de consultas, pois permite
+--a localização mais rápida de um registro.
+--No contexto de banco de dados:
+--trata se de uma estrutura (ou arquivo)
+--auxiliar associado a uma tabela (ou coleção de dados). Possui a função de
+--acelerar o tempo de acesso às linhas de uma tabela.
+--
+--
+--Tipos de Índices
+--Existem quatro tipos básico de índices:
+--• Compostos Mais de uma coluna da tabela sendo utilizada;
+--• Simples Apenas uma coluna da tabela sendo utilizada;
+--• Internos Dentro da estrutura de dados da tabela;
+--• Externos Faz referência fora da tabela
+--
+--
+--A utilização de índices é indicada para que haja um menor consumo e
+--retorno mais rápido do servidor para a aplicação em questão. Resumindo,
+--eles servem para proporcionar:
+--• Agilidade e performance em buscas;
+--• Menor consumo de recursos (Input e Output de disco), pois consome
+--menos recurso do servidor, processamento e memória, além de trazer
+--retorno para a aplicação de forma mais rápida.
+--Input
+--e Output (leitura e gravação em disco Para cada busca realizada
+--no servidor de banco de dados, caso aquele dado esteja em memória
+--(cache), é necessário realizar uma busca diretamente no disco. Essas
+--buscas tem um alto nível de processamento.
+--
+--Os índices devem ser utilizados sempre que houver um
+--grande número de pesquisas sobre determinado item, afim
+--de otimizar as buscas e melhorar a performance.
 
+        
+--Agora vamos aprender a criar um índice simples. Para isso, criamos uma
+--tabela (“produtos”), adicionando um índice para o campo nome, através do
+--comando  -- INDEX idx_nome (Nome);
 
+        
+--CREATE TABLE produtos(
+--Codigo INT,
+--Nome VARCHAR(50),
+--key Codigo Codigo
+--INDEX idx_nome (Nome)
+--);
+--O índice ( idx_nome ) referencia o campo nome, utilizando o campo completo como índice. Para
+--visualizar os índices de uma tabela, você pode utilizar o comando “SHOW Indexes" A partir
+--da tabela recém criada, vamos para o prompt e escrevemos o comando:
+--
+--SHOW INDEXES FROM produtos;
 
+--
+--Adicionando índices a
+--tabelas existentes
+--É
+--importante que o banco de dados seja planejado para a otimização
+--de certas buscas. Caso contrário, no momento em que as aplicações
+--necessitarem consumir mais dados do banco, poderemos ter
+--problemas na performance . Em uma situação comum, não teríamos
+--índices na estrutura inicial da tabela. Por isso, vamos criar novamente
+--a tabela “produtos” sem adicionar índices.
+--
+--CREATE TABLE produtos (
+--Codigo INT,
+--Nome VARCHAR(50),
+--key Codigo (Codigo)
+--);
 
+--        
+--Quando percebemos que a aplicação está perdendo performance, pois são feitas muitas
+--requisições de busca pelo nome dos produtos, podemos resolver o problema através de
+--um índice para o campo “nome”. Para adicionar um índice em uma tabela já criada, vamos
+--utilizar o seguinte comando:
+--
+--CREATE INDEX idx_nome ON produtos(Nome);
 
+        
+        
+--Particionamento de tabela;
+--Os índices auxiliam em consultas e
+--subconsultas , porém quando a tabela possui um
+--grande volume de dados, o desempenho do banco de dados continua prejudicado.
+--Para resolver este problema, o
+--particionamento de tabelas, ou seja, a divisão de uma
+--tabela inteira em sub tabelas menores, torna se a solução ideal. A grosso modo,
+--estamos quebrando tabelas em sub tabelas, ou seja, particionando.
 
+--        Particionamento
+--Dados e índices são armazenados em
+--múltiplos arquivos, 1 por partição.
+--Número máximo de partições: 1024
+--(isto é definição do MySQL).
 
+--        
+--Quais as vantagens? 
+--A aplicação permanece igual!
+--Na aplicação, nada muda. A tabela continuará sendo vista como uma tabela única.
+--Mais dados em uma única tabela
+--Dependendo
+--do sistema de arquivos utilizado pelo servidor MySQL, há um limite
+--máximo de tamanho de arquivo, o que limita a quantidade de dados que podem ser
+--inseridos em uma tabela. Utilizando o particionamento , partimos a tabela em múltiplos
+--arquivos, aumentando assim o limite máximo de dados que podem ser inseridos nessa
+--tabela. Em sistemas de arquivo modernos, esse limite é muito alto, mas ainda assim, é
+--uma vantagem.
 
+Remoção de dados absoletos Dependendo do particionamento utilizado, a remoção de dados obsoletos é facilitada.
+Esta vantagem é mais fácil de explicar utilizando o exemplo abaixo.
+Pense em uma escola, onde todas as matrículas encontram se em uma única tabela.
+Neste caso, poderíamos particionar esta tabela única pelo ano de matricula, gerando
+diversas outras sub tabelas . Portanto, caso não houvesse mais o interesse por um
+determinado ano de matrícula, a remoção poderia ser aplicada especificamente
+naquele ano de interesse. Desta forma, removendo os dados absoletos
+
+--
+--Desempenho de buscas otimizado
+--O desempenho de buscas é otimizado, pois diminui o universo no qual elas são realizadas.
+--Antes a busca era realizada baseando se em um universo enorme de dados de uma
+--tabela, agora a busca baseia se em apenas uma fração deste universo, bem menor e subdividido.        
+--        
 
 
