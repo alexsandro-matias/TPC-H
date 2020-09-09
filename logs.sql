@@ -426,6 +426,278 @@ mysql> SELECT L_RETURNFLAG, L_LINESTATUS, SUM(L_QUANTITY) AS SUM_QTY, SUM(L_EXTE
 +--------------+--------------+--------------+------------------+--------------------+----------------------+-----------+--------------+----------+-------------+
 4 rows in set (3 min 3.58 sec)
 
+
+
+
+
+
+
+
+
+------- 5/09/2020 -------
+mysql> SELECT table_name AS "Table", ROUND(((data_length + index_length) / 1024 / 1024), 2) AS "Size (MB)" FROM information_schema.TABLES WHERE table_schema = "seu_banco" ORDER BY (data_length + index_length) DESC;
+Empty set (0.01 sec)
+
+mysql> SHOW TABLE STATUS LIKE 'tpch';
+ERROR 1046 (3D000): No database selected
+mysql> use tpch;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLE STATUS LIKE 'tpch';
+Empty set (0.00 sec)
+
+mysql> SHOW TABLE STATUS LIKE 
+Display all 886 possibilities? (y or n) 
+mysql> SHOW TABLE STATUS LIKE t
+tee   tpch 
+mysql> SHOW TABLE STATUS LIKE tpch ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tpch' at line 1
+mysql> SELECT table_schema "database name",
+    ->     sum( data_length + index_length ) / 1024 / 1024 "database size in MB",
+    ->     sum( data_free )/ 1024 / 1024 "free space in MB"
+    -> FROM information_schema.TABLES
+    -> GROUP BY table_schema; 
++--------------------+---------------------+------------------+
+| database name      | database size in MB | free space in MB |
++--------------------+---------------------+------------------+
+| information_schema |          0.00000000 |       0.00000000 |
+| mysql              |          2.48437500 |     124.00000000 |
+| performance_schema |          0.00000000 |       0.00000000 |
+| sys                |          0.01562500 |       0.00000000 |
+| tpch               |      15332.89062500 |       0.00000000 |
++--------------------+---------------------+------------------+
+5 rows in set (0.25 sec)
+
+mysql> SELECT table_schema "database name", sum( data_length + index_length ) / 1024 / 1024 "database size in MB", sum( data_free )/ 1024 / 1024 "free space in MB" FROM information_schema.TABLES GROUP BY table_schema; 
++--------------------+---------------------+------------------+
+| database name      | database size in MB | free space in MB |
++--------------------+---------------------+------------------+
+| information_schema |          0.00000000 |       0.00000000 |
+| mysql              |          2.48437500 |     124.00000000 |
+| performance_schema |          0.00000000 |       0.00000000 |
+| sys                |          0.01562500 |       0.00000000 |
+| tpch               |      15332.89062500 |       0.00000000 |
++--------------------+---------------------+------------------+
+5 rows in set (0.01 sec)
+
+
+
+
+
+
+
+------- 5/09/2020 -------
+
+mysql> SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB"
+    -> FROM information_schema.TABLES
+    -> WHERE table_schema = "<database_name>";
++------------+
+| Size in GB |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB" FROM information_schema.TABLES WHERE table_schema = "tpch";
++------------+
+| Size in GB |
++------------+
+|      14.97 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT table_name AS "Table", ROUND(((data_length + index_length) / 1024 / 1024), 2) AS "Size (MB)" FROM information_schema.TABLES WHERE table_schema = "seu_banco" ORDER BY (data_length + index_length) DESC;
+Empty set (0.01 sec)
+
+mysql> SHOW TABLE STATUS LIKE 'tpch';
+ERROR 1046 (3D000): No database selected
+mysql> use tpch;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLE STATUS LIKE 'tpch';
+Empty set (0.00 sec)
+
+mysql> SHOW TABLE STATUS LIKE 
+Display all 886 possibilities? (y or n) 
+mysql> SHOW TABLE STATUS LIKE t
+tee   tpch 
+mysql> SHOW TABLE STATUS LIKE tpch ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tpch' at line 1
+mysql> SELECT table_schema "database name",
+    ->     sum( data_length + index_length ) / 1024 / 1024 "database size in MB",
+    ->     sum( data_free )/ 1024 / 1024 "free space in MB"
+    -> FROM information_schema.TABLES
+    -> GROUP BY table_schema; 
++--------------------+---------------------+------------------+
+| database name      | database size in MB | free space in MB |
++--------------------+---------------------+------------------+
+| information_schema |          0.00000000 |       0.00000000 |
+| mysql              |          2.48437500 |     124.00000000 |
+| performance_schema |          0.00000000 |       0.00000000 |
+| sys                |          0.01562500 |       0.00000000 |
+| tpch               |      15332.89062500 |       0.00000000 |
++--------------------+---------------------+------------------+
+5 rows in set (0.25 sec)
+
+mysql> SELECT table_schema "database name", sum( data_length + index_length ) / 1024 / 1024 "database size in MB", sum( data_free )/ 1024 / 1024 "free space in MB" FROM information_schema.TABLES GROUP BY table_schema; 
++--------------------+---------------------+------------------+
+| database name      | database size in MB | free space in MB |
++--------------------+---------------------+------------------+
+| information_schema |          0.00000000 |       0.00000000 |
+| mysql              |          2.48437500 |     124.00000000 |
+| performance_schema |          0.00000000 |       0.00000000 |
+| sys                |          0.01562500 |       0.00000000 |
+| tpch               |      15332.89062500 |       0.00000000 |
++--------------------+---------------------+------------------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB"
+    -> FROM information_schema.TABLES
+    -> WHERE table_schema = "<database_name>";
++------------+
+| Size in GB |
++------------+
+|       NULL |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB" FROM information_schema.TABLES WHERE table_schema = "tpch";
++------------+
+| Size in GB |
++------------+
+|      14.97 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT table_schema "database", sum(data_length + index_length)/1024/1024/1024 "size in GB" FROM information_schema.TABLES GROUP BY table_schema;
++--------------------+-----------------+
+| database           | size in GB      |
++--------------------+-----------------+
+| information_schema |  0.000000000000 |
+| mysql              |  0.002426147461 |
+| performance_schema |  0.000000000000 |
+| sys                |  0.000015258789 |
+| tpch               | 14.973526000977 |
++--------------------+-----------------+
+5 rows in set (0.01 sec)
+
+
+
+
+
+
+------- 09/09/2020 -------
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (3 min 1.76 sec)
+
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (2 min 46.19 sec)
+
+mysql> show global variables like 'innodb_stats_on_metadata';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| innodb_stats_on_metadata | OFF   |
++--------------------------+-------+
+1 row in set (0.04 sec)
+
+mysql> set global innodb_stats_on_metadata = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (2 min 50.18 sec)
+
+mysql> CREATE INDEX IDX_ORDERS ON LINEITEM(L_ORDERKEY);
+Query OK, 0 rows affected (5 min 37.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
+
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (1 min 53.87 sec)
+
 mysql> 
+mysql> mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (1 min 56.27 sec)
+
+
+
+mysql> show indexes FROM  LINEITEM;
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table    | Non_unique | Key_name     | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| LINEITEM |          0 | PRIMARY      |            1 | L_ORDERKEY   | A         |    14849235 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          0 | PRIMARY      |            2 | L_LINENUMBER | A         |    59396948 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | LINEITEM_FK2 |            1 | L_PARTKEY    | A         |     2117665 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | LINEITEM_FK2 |            2 | L_SUPPKEY    | A         |     8045878 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | IDX_ORDERS   |            1 | L_ORDERKEY   | A         |    15006484 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | IDX_LINEITEM |            1 | L_LINENUMBER | A         |        5541 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+6 rows in set (0.05 sec)
+
+mysql> drop INDEX IDX_LINEITEM ON LINEITEM;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show indexes FROM  LINEITEM;
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table    | Non_unique | Key_name     | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| LINEITEM |          0 | PRIMARY      |            1 | L_ORDERKEY   | A         |    14849235 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          0 | PRIMARY      |            2 | L_LINENUMBER | A         |    59396948 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | LINEITEM_FK2 |            1 | L_PARTKEY    | A         |     2117665 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | LINEITEM_FK2 |            2 | L_SUPPKEY    | A         |     8045878 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| LINEITEM |          1 | IDX_ORDERS   |            1 | L_ORDERKEY   | A         |    15006484 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++----------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+
+
+
+
+
+
+
+
 
 
