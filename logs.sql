@@ -693,6 +693,43 @@ mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
 +--------+------------+
 
 
+mysql> show indexes FROM  REG
+REGEXP              REGION              REGION.R_COMMENT    REGION.R_NAME       REGION.R_REGIONKEY 
+mysql> show indexes FROM  REGION;
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table  | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| REGION |          0 | PRIMARY  |            1 | R_REGIONKEY | A         |           5 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+1 row in set (0.01 sec)
+
+mysql> CREATE INDEX IDX_REGION ON REGION();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> CREATE INDEX IDX_REGION ON REGION;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> CREATE INDEX IDX_REGION ON REGION(R_REGIONKEY);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE INDEX IDX_ORDERS ON ORD(R_REGIONKEY);
+ORD                     ORDERS                  ORDERS.O_COMMENT        ORDERS.O_ORDERDATE      ORDERS.O_ORDERPRIORITY  ORDERS.O_SHIPPRIORITY  
+ORDER                   ORDERS.O_CLERK          ORDERS.O_CUSTKEY        ORDERS.O_ORDERKEY       ORDERS.O_ORDERSTATUS    ORDERS.O_TOTALPRICE    
+mysql> CREATE INDEX IDX_ORDERS ON ORDER(R_REGIONKEY);
+ORDER                   ORDERS.O_CLERK          ORDERS.O_CUSTKEY        ORDERS.O_ORDERKEY       ORDERS.O_ORDERSTATUS    ORDERS.O_TOTALPRICE    
+ORDERS                  ORDERS.O_COMMENT        ORDERS.O_ORDERDATE      ORDERS.O_ORDERPRIORITY  ORDERS.O_SHIPPRIORITY  
+mysql> CREATE INDEX IDX_ORDERS ON ORDERS( O_ORDERKEY);
+Query OK, 0 rows affected (56.38 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE INDEX IDX_O_CUSTKEY ON ORDERS(O_CUSTKEY);
+
+Query OK, 0 rows affected (1 min 4.86 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
+
+
 
 
 
