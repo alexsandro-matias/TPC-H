@@ -726,8 +726,193 @@ mysql> CREATE INDEX IDX_O_CUSTKEY ON ORDERS(O_CUSTKEY);
 Query OK, 0 rows affected (1 min 4.86 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+
+
+
+
+
+------- 10/09/2020 -------
+-- Seu innodb_buffer_pool_size é enorme. Você definiu em 20971520000. São 19,5135 GB.
+-- Se você tiver apenas 5 GB de dados e índices InnoDB, deverá ter apenas 8 GB. Mesmo isso pode ser muito alto.
+
+-- Aqui está o que você deveria fazer. Primeiro, execute esta consulta
+
+SELECT CEILING(Total_InnoDB_Bytes*1.6/POWER(1024,3)) RIBPS FROM
+(SELECT SUM(data_length+index_length) Total_InnoDB_Bytes
+FROM information_schema.tables WHERE engine='InnoDB') A;
+
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/12.sql;
++------------+-----------------+----------------+
+| L_SHIPMODE | HIGH_LINE_COUNT | LOW_LINE_COUNT |
++------------+-----------------+----------------+
+| FOB        |           62493 |          92758 |
+| RAIL       |           62603 |          93394 |
++------------+-----------------+----------------+
+2 rows in set (1 min 57.29 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/12.sql;
++------------+-----------------+----------------+
+| L_SHIPMODE | HIGH_LINE_COUNT | LOW_LINE_COUNT |
++------------+-----------------+----------------+
+| FOB        |           62493 |          92758 |
+| RAIL       |           62603 |          93394 |
++------------+-----------------+----------------+
+2 rows in set (30.48 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/12.sql;
++------------+-----------------+----------------+
+| L_SHIPMODE | HIGH_LINE_COUNT | LOW_LINE_COUNT |
++------------+-----------------+----------------+
+| FOB        |           62493 |          92758 |
+| RAIL       |           62603 |          93394 |
++------------+-----------------+----------------+
+2 rows in set (29.89 sec)
+
 mysql> 
-mysql> SOURCE /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
+
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/1.sql;
++--------------+--------------+--------------+------------------+--------------------+----------------------+-----------+--------------+----------+-------------+
+| L_RETURNFLAG | L_LINESTATUS | SUM_QTY      | SUM_BASE_PRICE   | SUM_DISC_PRICE     | SUM_CHARGE           | AVG_QTY   | AVG_PRICE    | AVG_DISC | COUNT_ORDER |
++--------------+--------------+--------------+------------------+--------------------+----------------------+-----------+--------------+----------+-------------+
+| A            | F            | 377518399.00 |  566065727797.25 |  537759104278.0656 |  559276670892.116819 | 25.500975 | 38237.151009 | 0.050007 |    14804077 |
+| N            | F            |   9851614.00 |   14767438399.17 |   14028805792.2114 |   14590490998.366737 | 25.522448 | 38257.810660 | 0.049973 |      385998 |
+| N            | O            | 733701060.00 | 1100171316938.81 | 1045158178577.2160 | 1086976829223.385877 | 25.497651 | 38233.261606 | 0.049999 |    28775241 |
+| R            | F            | 377732830.00 |  566431054976.00 |  538110922664.7677 |  559634780885.086257 | 25.508385 | 38251.219274 | 0.049997 |    14808183 |
++--------------+--------------+--------------+------------------+--------------------+----------------------+-----------+--------------+----------+-------------+
+4 rows in set (3 min 34.16 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (2 min 13.49 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (2 min 2.09 sec)
+
+
+
+-- Depois de reiniciado o ssitema e o serviço
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (2 min 8.84 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (25.35 sec)
+
+mysql> source /home/matias/automatizacao-mysql/tpch-dbgen/queries/8.sql;
++--------+------------+
+| O_YEAR | MKT_SHARE  |
++--------+------------+
+|   1995 | 0.03999695 |
+|   1996 | 0.03941426 |
++--------+------------+
+2 rows in set (25.69 sec)
+
+
+
+
+-- Configurando o cache
+
+mysql> show variables like 'query%';
++------------------------+-------+
+| Variable_name          | Value |
++------------------------+-------+
+| query_alloc_block_size | 8192  |
+| query_prealloc_size    | 8192  |
++------------------------+-------+
+2 rows in set (0.01 sec)
+
+mysql> show variables like '%query%';
++------------------------------+------------------------------------+
+| Variable_name                | Value                              |
++------------------------------+------------------------------------+
+| binlog_rows_query_log_events | OFF                                |
+| ft_query_expansion_limit     | 20                                 |
+| have_query_cache             | NO                                 |
+| long_query_time              | 10.000000                          |
+| query_alloc_block_size       | 8192                               |
+| query_prealloc_size          | 8192                               |
+| slow_query_log               | OFF                                |
+| slow_query_log_file          | /var/lib/mysql/alexsandro-slow.log |
++------------------------------+------------------------------------+
+8 rows in set (0.00 sec)
+
+mysql>  show variables like 'have_query_cache';
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| have_query_cache | NO    |
++------------------+-------+
+1 row in set (0.00 sec)
+
+mysql>  set have_query_cache = 1;
+ERROR 1238 (HY000): Variable 'have_query_cache' is a read only variable
+mysql> 
+
+
+-- 17/09/2020
+
+mysql> ALTER TABLE NATION MODIFY N_NATIONKEY SMALLINT;
+ERROR 3780 (HY000): Referencing column 'S_NATIONKEY' and referenced column 'N_NATIONKEY' in foreign key constraint 'SUPPLIER_ibfk_1' are incompatible.
+mysql> ALTER TABLE SUP
+SUPER                 SUPPLIER.S_ADDRESS    SUPPLIER.S_NATIONKEY 
+SUPPLIER              SUPPLIER.S_COMMENT    SUPPLIER.S_PHONE     
+SUPPLIER.S_ACCTBAL    SUPPLIER.S_NAME       SUPPLIER.S_SUPPKEY   
+mysql> ALTER TABLE SUPPLIER MOD
+MOD       MODE      MODIFIES  MODIFY   
+mysql> ALTER TABLE SUPPLIER MODIFY 
+Display all 887 possibilities? (y or n) 
+mysql> ALTER TABLE SUPPLIER MODIFY S_
+S_ACCTBAL    S_COMMENT    S_NATIONKEY  S_SUPPKEY   
+S_ADDRESS    S_NAME       S_PHONE     
+mysql> ALTER TABLE SUPPLIER MODIFY S_NA
+S_NAME       S_NATIONKEY 
+mysql> ALTER TABLE SUPPLIER MODIFY S_NATIONKEY SMALLINT;
+ERROR 3780 (HY000): Referencing column 'S_NATIONKEY' and referenced column 'N_NATIONKEY' in foreign key constraint 'SUPPLIER_ibfk_1' are incompatible.
+mysql> SET FOREIGN_KEY_CHECKS = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE SUPPLIER MODIFY S_NATIONKEY SMALLINT;
+ERROR 3780 (HY000): Referencing column 'S_NATIONKEY' and referenced column 'N_NATIONKEY' in foreign key constraint 'SUPPLIER_ibfk_1' are incompatible.
+mysql> WARNINGS 
+Display all 887 possibilities? (y or n) 
+mysql> WARNINGS ;
+Show warnings enabled.
+mysql> 
+mysql> ALTER TABLE SUPPLIER MODIFY S_NATIONKEY SMALLINT;
+ERROR 3780 (HY000): Referencing column 'S_NATIONKEY' and referenced column 'N_NATIONKEY' in foreign key constraint 'SUPPLIER_ibfk_1' are incompatible.
+mysql> ALTER TABLE SUPPLIER MODIFY SMALLINT S_NATIONKEY;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SMALLINT S_NATIONKEY' at line 1
+
+
+-- $ mysqldump -u matias -p  TPCH_otimizado > backup.sql
+-- Enter password: 
+-- mysqldump: Error 2013: Lost connection to MySQL server during query when dumping table `PARTSUPP` at row: 5067866
+
 
 
 
