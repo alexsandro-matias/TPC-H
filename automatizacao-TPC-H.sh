@@ -16,7 +16,7 @@ cd /home/matias/automatizacao-mysql/
 
 cp makefile.suite tpch-dbgen/
 
-# make -f makefile.suite
+make -f makefile.suite
 
 
 mkdir data
