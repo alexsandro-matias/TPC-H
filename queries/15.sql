@@ -1,36 +1,36 @@
--- using 1365545250 as a seed to the RNG
+-- USING 1365545250 AS A SEED TO THE RNG
 
-create view revenue0 (supplier_no, total_revenue) as
-	select
-		l_suppkey,
-		sum(l_extendedprice * (1 - l_discount))
-	from
-		lineitem
-	where
-		l_shipdate >= date '1997-07-01'
-		and l_shipdate < date '1997-07-01' + interval '3' month
-	group by
-		l_suppkey;
+CREATE VIEW REVENUE0 (SUPPLIER_NO, TOTAL_REVENUE) AS
+	SELECT
+		L_SUPPKEY,
+		SUM(L_EXTENDEDPRICE * (1 - L_DISCOUNT))
+	FROM
+		LINEITEM
+	WHERE
+		L_SHIPDATE >= DATE '1997-07-01'
+		AND L_SHIPDATE < DATE '1997-07-01' + INTERVAL '3' MONTH
+	GROUP BY
+		L_SUPPKEY;
 
 
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue0
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue0
+SELECT
+	S_SUPPKEY,
+	S_NAME,
+	S_ADDRESS,
+	S_PHONE,
+	TOTAL_REVENUE
+FROM
+	SUPPLIER,
+	REVENUE0
+WHERE
+	S_SUPPKEY = SUPPLIER_NO
+	AND TOTAL_REVENUE = (
+		SELECT
+			MAX(TOTAL_REVENUE)
+		FROM
+			REVENUE0
 	)
-order by
-	s_suppkey;
+ORDER BY
+	S_SUPPKEY;
 
-drop view revenue0;
+DROP VIEW REVENUE0;

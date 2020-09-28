@@ -1,33 +1,33 @@
--- using 1365545250 as a seed to the RNG
+-- USING 1365545250 AS A SEED TO THE RNG
 
 
-select
-	p_brand,
-	p_type,
-	p_size,
-	count(distinct ps_suppkey) as supplier_cnt
-from
-	partsupp,
-	part
-where
-	p_partkey = ps_partkey
-	and p_brand <> 'Brand#34'
-	and p_type not like 'LARGE BRUSHED%'
-	and p_size in (48, 19, 12, 4, 41, 7, 21, 39)
-	and ps_suppkey not in (
-		select
-			s_suppkey
-		from
-			supplier
-		where
-			s_comment like '%Customer%Complaints%'
+SELECT
+	P_BRAND,
+	P_TYPE,
+	P_SIZE,
+	COUNT(DISTINCT PS_SUPPKEY) AS SUPPLIER_CNT
+FROM
+	PARTSUPP,
+	PART
+WHERE
+	P_PARTKEY = PS_PARTKEY
+	AND P_BRAND <> 'BRAND#34'
+	AND P_TYPE NOT LIKE 'LARGE BRUSHED%'
+	AND P_SIZE IN (48, 19, 12, 4, 41, 7, 21, 39)
+	AND PS_SUPPKEY NOT IN (
+		SELECT
+			S_SUPPKEY
+		FROM
+			SUPPLIER
+		WHERE
+			S_COMMENT LIKE '%CUSTOMER%COMPLAINTS%'
 	)
-group by
-	p_brand,
-	p_type,
-	p_size
-order by
-	supplier_cnt desc,
-	p_brand,
-	p_type,
-	p_size;
+GROUP BY
+	P_BRAND,
+	P_TYPE,
+	P_SIZE
+ORDER BY
+	SUPPLIER_CNT DESC,
+	P_BRAND,
+	P_TYPE,
+	P_SIZE;

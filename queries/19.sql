@@ -1,38 +1,38 @@
--- using 1365545250 as a seed to the RNG
+-- USING 1365545250 AS A SEED TO THE RNG
 
 
-select
-	sum(l_extendedprice* (1 - l_discount)) as revenue
-from
-	lineitem,
-	part
-where
+SELECT
+	SUM(L_EXTENDEDPRICE* (1 - L_DISCOUNT)) AS REVENUE
+FROM
+	LINEITEM,
+	PART
+WHERE
 	(
-		p_partkey = l_partkey
-		and p_brand = 'Brand#52'
-		and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
-		and l_quantity >= 4 and l_quantity <= 4 + 10
-		and p_size between 1 and 5
-		and l_shipmode in ('AIR', 'AIR REG')
-		and l_shipinstruct = 'DELIVER IN PERSON'
+		P_PARTKEY = L_PARTKEY
+		AND P_BRAND = 'BRAND#52'
+		AND P_CONTAINER IN ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+		AND L_QUANTITY >= 4 AND L_QUANTITY <= 4 + 10
+		AND P_SIZE BETWEEN 1 AND 5
+		AND L_SHIPMODE IN ('AIR', 'AIR REG')
+		AND L_SHIPINSTRUCT = 'DELIVER IN PERSON'
 	)
-	or
+	OR
 	(
-		p_partkey = l_partkey
-		and p_brand = 'Brand#11'
-		and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
-		and l_quantity >= 18 and l_quantity <= 18 + 10
-		and p_size between 1 and 10
-		and l_shipmode in ('AIR', 'AIR REG')
-		and l_shipinstruct = 'DELIVER IN PERSON'
+		P_PARTKEY = L_PARTKEY
+		AND P_BRAND = 'BRAND#11'
+		AND P_CONTAINER IN ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+		AND L_QUANTITY >= 18 AND L_QUANTITY <= 18 + 10
+		AND P_SIZE BETWEEN 1 AND 10
+		AND L_SHIPMODE IN ('AIR', 'AIR REG')
+		AND L_SHIPINSTRUCT = 'DELIVER IN PERSON'
 	)
-	or
+	OR
 	(
-		p_partkey = l_partkey
-		and p_brand = 'Brand#51'
-		and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
-		and l_quantity >= 29 and l_quantity <= 29 + 10
-		and p_size between 1 and 15
-		and l_shipmode in ('AIR', 'AIR REG')
-		and l_shipinstruct = 'DELIVER IN PERSON'
+		P_PARTKEY = L_PARTKEY
+		AND P_BRAND = 'BRAND#51'
+		AND P_CONTAINER IN ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+		AND L_QUANTITY >= 29 AND L_QUANTITY <= 29 + 10
+		AND P_SIZE BETWEEN 1 AND 15
+		AND L_SHIPMODE IN ('AIR', 'AIR REG')
+		AND L_SHIPINSTRUCT = 'DELIVER IN PERSON'
 	);

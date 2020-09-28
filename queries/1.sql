@@ -1,24 +1,24 @@
--- using 1365545250 as a seed to the RNG
+-- USING 1365545250 AS A SEED TO THE RNG
 
 
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '108' day
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;
+SELECT
+	L_RETURNFLAG,
+	L_LINESTATUS,
+	SUM(L_QUANTITY) AS SUM_QTY,
+	SUM(L_EXTENDEDPRICE) AS SUM_BASE_PRICE,
+	SUM(L_EXTENDEDPRICE * (1 - L_DISCOUNT)) AS SUM_DISC_PRICE,
+	SUM(L_EXTENDEDPRICE * (1 - L_DISCOUNT) * (1 + L_TAX)) AS SUM_CHARGE,
+	AVG(L_QUANTITY) AS AVG_QTY,
+	AVG(L_EXTENDEDPRICE) AS AVG_PRICE,
+	AVG(L_DISCOUNT) AS AVG_DISC,
+	COUNT(*) AS COUNT_ORDER
+FROM
+	LINEITEM
+WHERE
+	L_SHIPDATE <= DATE '1998-12-01' - INTERVAL '108' DAY
+GROUP BY
+	L_RETURNFLAG,
+	L_LINESTATUS
+ORDER BY
+	L_RETURNFLAG,
+	L_LINESTATUS;
