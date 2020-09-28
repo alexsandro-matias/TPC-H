@@ -8,7 +8,3 @@ sudo apt install vim git build-essential neofetch telegram-desktop synaptic  i3 
 sudo apt install mysql-server mysql-client
 
 
-## Cloning repository
-git clone https://github.com/electrum/tpch-dbgen.git
-
-
