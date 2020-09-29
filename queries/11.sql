@@ -1,30 +1,30 @@
--- using 1365545250 as a seed to the RNG
+﻿-- USING 1365545250 AS A SEED TO THE RNG
 
 
-select
-	ps_partkey,
-	sum(ps_supplycost * ps_availqty) as value
-from
-	partsupp,
-	supplier,
-	nation
-where
-	ps_suppkey = s_suppkey
-	and s_nationkey = n_nationkey
-	and n_name = 'MOZAMBIQUE'
-group by
-	ps_partkey having
-		sum(ps_supplycost * ps_availqty) > (
-			select
-				sum(ps_supplycost * ps_availqty) * 0.0001000000
-			from
-				partsupp,
-				supplier,
-				nation
-			where
-				ps_suppkey = s_suppkey
-				and s_nationkey = n_nationkey
-				and n_name = 'MOZAMBIQUE'
+SELECT
+	PS_PARTKEY,
+	SUM(PS_SUPPLYCOST * PS_AVAILQTY) AS VALUE
+FROM
+	PARTSUPP,
+	SUPPLIER,
+	NATION
+WHERE
+	PS_SUPPKEY = S_SUPPKEY
+	AND S_NATIONKEY = N_NATIONKEY
+	AND N_NAME = 'MOZAMBIQUE'
+GROUP BY
+	PS_PARTKEY HAVING
+		SUM(PS_SUPPLYCOST * PS_AVAILQTY) > (
+			SELECT
+				SUM(PS_SUPPLYCOST * PS_AVAILQTY) * 0.0001000000
+			FROM
+				PARTSUPP,
+				SUPPLIER,
+				NATION
+			WHERE
+				PS_SUPPKEY = S_SUPPKEY
+				AND S_NATIONKEY = N_NATIONKEY
+				AND N_NAME = 'MOZAMBIQUE'
 		)
-order by
-	value desc;
+ORDER BY
+	VALUE DESC;
