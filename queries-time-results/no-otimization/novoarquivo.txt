@@ -1,0 +1,38 @@
+Eliminando linhas em branco
+
+
+Para eliminar linhas em branco de um arquivo texto, utilize qualquer um dos comandos:
+
+$ sed '/^$/d' arquivo.txt > novoarquivo.txt
+
+
+2 min 18.45 sec
+4 min 37.03 sec
+6 min 55.54 sec
+9 min 14.01 sec
+11 min 32.57 sec
+13 min 51.18 sec
+16 min 9.78 sec
+18 min 28.32 sec
+20 min 46.98 sec
+23 min 5.55 sec
+25 min 24.24 sec
+27 min 42.76 sec
+30 min 1.35 sec
+32 min 19.96 sec
+34 min 38.59 sec
+36 min 57.34 sec
+39 min 15.86 sec
+41 min 34.44 sec
+43 min 53.06 sec
+46 min 11.71 sec
+48 min 30.31 sec
+50 min 48.89 sec
+53 min 7.48 sec
+55 min 26.09 sec
+57 min 44.60 sec
+1 hour 3.12 sec
+1 hour 2 min 21.71 sec
+1 hour 4 min 40.45 sec
+1 hour 6 min 58.96 sec
+1 hour 9 min 17.68 sec

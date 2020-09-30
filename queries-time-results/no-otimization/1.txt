@@ -1,0 +1,91 @@
+4 rows in set (2 min 18.45 sec)
+
+
+4 rows in set (4 min 37.03 sec)
+
+
+4 rows in set (6 min 55.54 sec)
+
+
+4 rows in set (9 min 14.01 sec)
+
+
+4 rows in set (11 min 32.57 sec)
+
+
+4 rows in set (13 min 51.18 sec)
+
+
+4 rows in set (16 min 9.78 sec)
+
+
+4 rows in set (18 min 28.32 sec)
+
+
+4 rows in set (20 min 46.98 sec)
+
+
+4 rows in set (23 min 5.55 sec)
+
+
+4 rows in set (25 min 24.24 sec)
+
+
+4 rows in set (27 min 42.76 sec)
+
+
+4 rows in set (30 min 1.35 sec)
+
+
+
+4 rows in set (32 min 19.96 sec)
+
+
+4 rows in set (34 min 38.59 sec)
+
+
+4 rows in set (36 min 57.34 sec)
+
+
+4 rows in set (39 min 15.86 sec)
+
+
+4 rows in set (41 min 34.44 sec)
+
+
+4 rows in set (43 min 53.06 sec)
+
+
+4 rows in set (46 min 11.71 sec)
+
+
+4 rows in set (48 min 30.31 sec)
+
+
+4 rows in set (50 min 48.89 sec)
+
+
+4 rows in set (53 min 7.48 sec)
+
+
+4 rows in set (55 min 26.09 sec)
+
+
+4 rows in set (57 min 44.60 sec)
+
+
+4 rows in set (1 hour 3.12 sec)
+
+
+4 rows in set (1 hour 2 min 21.71 sec)
+
+
+4 rows in set (1 hour 4 min 40.45 sec)
+
+
+4 rows in set (1 hour 6 min 58.96 sec)
+
+
+4 rows in set (1 hour 9 min 17.68 sec)
+
+Query OK, 0 rows affected (1 hour 9 min 17.68 sec)
