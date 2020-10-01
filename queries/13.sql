@@ -1,23 +1,23 @@
--- using 1365545250 as a seed to the RNG
+﻿-- USING 1365545250 AS A SEED TO THE RNG
 
 
-select
-	c_count,
-	count(*) as custdist
-from
+SELECT
+	C_COUNT,
+	COUNT(*) AS CUSTDIST
+FROM
 	(
-		select
-			c_custkey,
-			count(o_orderkey) as c_count
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%pending%deposits%'
-		group by
-			c_custkey
-	) c_orders
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;
+		SELECT
+			C_CUSTKEY,
+			COUNT(O_ORDERKEY) AS C_COUNT
+		FROM
+			CUSTOMER LEFT OUTER JOIN ORDERS ON
+				C_CUSTKEY = O_CUSTKEY
+				AND O_COMMENT NOT LIKE '%PENDING%DEPOSITS%'
+		GROUP BY
+			C_CUSTKEY
+	) C_ORDERS
+GROUP BY
+	C_COUNT
+ORDER BY
+	CUSTDIST DESC,
+	C_COUNT DESC;

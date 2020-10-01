@@ -1,5 +1,5 @@
 ﻿DELIMITER //
-CREATE PROCEDURE repete_consulta3 (limite TINYINT UNSIGNED)
+CREATE PROCEDURE repete_consulta13 (limite TINYINT UNSIGNED)
 BEGIN
     DECLARE contador TINYINT UNSIGNED DEFAULT 0;
     loop_teste: LOOP
@@ -11,29 +11,37 @@ BEGIN
 
 
 
-        SELECT
-            L_ORDERKEY,
-            SUM(L_EXTENDEDPRICE * (1 - L_DISCOUNT)) AS REVENUE,
-            O_ORDERDATE,
-            O_SHIPPRIORITY
-        FROM
-            CUSTOMER,
-            ORDERS,
-            LINEITEM
-        WHERE
-            C_MKTSEGMENT = 'AUTOMOBILE'
-            AND C_CUSTKEY = O_CUSTKEY
-            AND L_ORDERKEY = O_ORDERKEY
-            AND O_ORDERDATE < DATE '1995-03-13'
-            AND L_SHIPDATE > DATE '1995-03-13'
-        GROUP BY
-            L_ORDERKEY,
-            O_ORDERDATE,
-            O_SHIPPRIORITY
-        ORDER BY
-            REVENUE DESC,
-            O_ORDERDATE
-        LIMIT 10;
+
+-- USING 1365545250 AS A SEED TO THE RNG
+
+
+-- USING 1365545250 AS A SEED TO THE RNG
+
+
+SELECT
+	C_COUNT,
+	COUNT(*) AS CUSTDIST
+FROM
+	(
+		SELECT
+			C_CUSTKEY,
+			COUNT(O_ORDERKEY) AS C_COUNT
+		FROM
+			CUSTOMER LEFT OUTER JOIN ORDERS ON
+				C_CUSTKEY = O_CUSTKEY
+				AND O_COMMENT NOT LIKE '%PENDING%DEPOSITS%'
+		GROUP BY
+			C_CUSTKEY
+	) C_ORDERS
+GROUP BY
+	C_COUNT
+ORDER BY
+	CUSTDIST DESC,
+	C_COUNT DESC;
+
+
+
+
 
 
 
@@ -45,4 +53,4 @@ END//
 DELIMITER ;
 
 -- Testando:
-CALL repete_consulta3(31);
+CALL repete_consulta13(31);
