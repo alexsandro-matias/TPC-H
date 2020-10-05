@@ -1,5 +1,5 @@
 ﻿DELIMITER //
-CREATE PROCEDURE repete_consulta9___ (limite TINYINT UNSIGNED)
+CREATE PROCEDURE repete_consulta9__ (limite TINYINT UNSIGNED)
 BEGIN
     DECLARE contador TINYINT UNSIGNED DEFAULT 0;
     loop_teste: LOOP
@@ -52,4 +52,4 @@ END//
 DELIMITER ;
 
 -- Testando:
-CALL repete_consulta9___(31);
+CALL repete_consulta9__(31);
