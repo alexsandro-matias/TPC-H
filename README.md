@@ -8,6 +8,7 @@ sudo apt install vim git build-essential neofetch telegram-desktop synaptic  i3 
 sudo apt install mysql-server mysql-client
 
 ## Test Environment
+'''
 For the tests, the system with the following characteristics was used:
 • OS: Debian GNU / Linux 10 (Buster) x86_64;
 • Kernel: 4.19.0-10-amd64;
@@ -18,5 +19,4 @@ For the tests, the system with the following characteristics was used:
 • GPU: AMD ATI Radeon Vega Series / Radeon Vega Mobile Seri;
 • Memory: 1795MiB / 15026MiB;
 • MySQL: 8.0.21 for Linux on x86_64 (MySQL Community Server - GPL).
-
-
+'''
