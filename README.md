@@ -6,5 +6,15 @@ sudo apt update && sudo apt upgrade && sudo apt dist-upgrade;
 sudo apt install vim git build-essential neofetch telegram-desktop synaptic  i3 dmenu
 ## Installing the MySQL Server 
 sudo apt install mysql-server mysql-client
-
+## Environment of Tests 
+    - OS: Debian GNU/Linux 10 (Buster) x86_64;
+    - Kernel: 4.19.0-10-amd64;
+    - Packages: 1426 (dpkg);
+    - Shell: bash 5.0.3;
+    - DE: i3 ;
+    - CPU: AMD Ryzen 3 2200G (4) @ 3.500GHz;
+    - GPU: AMD ATI Radeon Vega Series / Radeon Vega Mobile Seri;
+    - Memory: 15026MiB;
+    - MySQL: 8.0.21 for Linux on x86_64 (MySQL Community Server - GPL).
+    - Engine: InnoDB.
 
