@@ -122,6 +122,19 @@ NAQUELE ANÃODE INTERESSE. DESTA FORMA, REMOVENDO OS DADOS ABSOLETÃOS
 --DESEMPENHO DE BUSCAS OTIMIZADO
 --O DESEMPENHO DE BUSCASÉOTIMIZADO, POIS DIMINUI O UNIVERSO NÃOQUAL ELAS REALIZADAS.
 --ANTES A BUSCA ERA REALIZADA BASEANDO SE EM UM UNIVERSO ENORME DE DADOS DE UMA
---TABELA, AGORA A BUSCA BASEIA SE EM APENAS UMA FRAÇÃO DESTE UNIVERSO, BEM MENOR E SUBDIVIDIDO.        
+--TABELA, AGORA A BUSCA BASEIA SE EM APENAS UMA FRAÇÃO DESTE UNIVERSO, BEM MENOR E SUBDIVIDIDO.     
+
+
+
+1.	PERFORMANCE
+Em tecnologia, refere-se ao desempenho da aplicação, o tempo de resposta para executar uma operação de forma satisfatória, garantindo também que a aplicação seja escalável (IZAC, 2018).
+
+1.1	TESTE DE CARGA OU VOLUME
+É utilizado para identificar o limite da aplicação, qual o máximo de processamento que pode suportar trabalhando com cargas acima do normal, seja para quantidade de acessos simultâneos ou quantidade de operações\transações processadas com grande volume.
+Para isso, antes dos testes começarem, define-se quais métricas serão coletadas e analisadas. A mais comum é o throughput, que é a taxa de transferência do processamento. Por exemplo, quantos registros foram processados por segundo, conceito usado bastante para redes, mas existe também o tempo de resposta, consumo de CPU e memória. É preciso conhecer essas métricas em condições normais para efeitos de comparação e análise das métricas quando o processamento validado for acima do normal.
+
+1.2	TESTE DE CAPACIDADE
+O teste de capacidade medirá as questões listadas nos testes de carga citado acima, porém considera um intervalo de tempo pré-determinado para essas medições.
+   
 -        
 
