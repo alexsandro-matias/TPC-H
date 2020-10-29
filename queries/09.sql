@@ -1,6 +1,7 @@
 ﻿-- USING 1365545250 AS A SEED TO THE RNG
 
 
+-- consulta 09 - 4 minutos 
 SELECT
 	NATION,
 	O_YEAR,
