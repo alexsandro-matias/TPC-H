@@ -124,6 +124,15 @@ NAQUELE ANÃODE INTERESSE. DESTA FORMA, REMOVENDO OS DADOS ABSOLETÃOS
 --ANTES A BUSCA ERA REALIZADA BASEANDO SE EM UM UNIVERSO ENORME DE DADOS DE UMA
 --TABELA, AGORA A BUSCA BASEIA SE EM APENAS UMA FRAÇÃO DESTE UNIVERSO, BEM MENOR E SUBDIVIDIDO.     
 
+Para comparações entre colunas de string não binárias, ambas as colunas devem usar o mesmo conjunto de caracteres. Por exemplo, comparar uma coluna utf8 com uma coluna latin1 impede o uso de um índice.
+Seção 8.3.13, “Índices descendentes”.
+• Em alguns casos, uma consulta pode ser otimizada para recuperar valores sem consultar as linhas de dados. (Um índice que fornece todos os resultados necessários para uma consulta é chamado de índice de cobertura.) Se uma consulta usa de uma tabela apenas colunas que estão incluídas em algum índice, os valores selecionados podem ser recuperados da árvore de índice para maior velocidade.  
+Os índices são menos importantes para consultas em tabelas pequenas ou grandes tabelas onde as consultas de relatório são mais processadas ou todas as linhas. Quando uma consulta precisa acessar a maioria das linhas, ler sequencialmente é mais rápido do que trabalhar por meio de um índice. As leituras sequenciais minimizam as buscas no disco, mesmo que nem todas as linhas sejam necessárias para a consulta.
+
+
+A métrica de desempenho relatada pelo TPC-H é chamada de Métrica de Desempenho de Consulta por Hora Composto TPC-H (QphH @ Size) e reflete vários aspectos da capacidade do sistema de processar consultas. Esses aspectos incluem o tamanho do banco de dados selecionado em relação ao qual as consultas são executadas, o poder de processamento da consulta quando as consultas são enviadas por um único fluxo e o rendimento da consulta quando as consultas são enviadas por vários usuários simultâneos. A métrica Preço / Desempenho TPC-H é expressa como $ / QphH @ Size. Para estar em conformidade com o padrão TPC-H, todas as referências aos resultados TPC-H para uma determinada configuração devem incluir todos os componentes de relatório necessários (ver Cláusula
+
+
 
 
    
